@@ -1,0 +1,40 @@
+cabal-version:       >= 1.10
+name:                diskrate
+version:             0.1
+synopsis:            Basic numerical analysis
+license:             BSD3
+author:              Andrew Cowie <andrew@operationaldynamics.com>
+maintainer:          Andrew Cowie <andrew@operationaldynamics.com>
+copyright:           © 2015 Operational Dynamics Consulting, Pty Ltd and Others
+category:            Other
+tested-with:         GHC == 7.8
+stability:           experimental
+
+build-type:          Simple
+
+
+executable           rates
+  default-language:  Haskell2010
+
+  build-depends:     base >= 4.7 && <5,
+                     bytestring,
+                     attoparsec,
+                     vector,
+                     statistics
+
+  hs-source-dirs:    src
+  main-is:           Rates.hs
+
+  ghc-options:       -O2
+                     -threaded
+                     -Wall
+                     -Wwarn
+                     -fwarn-tabs
+
+
+source-repository    head
+  type:              git
+  location:          git@github.com:afcowie/diskrate.git
+
+
+-- vim: set tabstop=21 expandtab:
