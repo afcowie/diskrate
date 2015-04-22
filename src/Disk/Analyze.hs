@@ -8,6 +8,7 @@ data Statistics = Statistics {
     minimumRate :: !Double,
     maximumRate :: !Double,
     meanRate    :: !Double,
+    stdDevRate  :: !Double
 } deriving (Eq,Show)
 
 {-
@@ -21,6 +22,7 @@ analyzeMeasurements observations =
         (V.minimum observations)
         (V.maximum observations)
         (mean observations)
+        (stdDev observations)
 
 
 
