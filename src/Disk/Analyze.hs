@@ -5,15 +5,17 @@ module Disk.Analyze where
 import Data.List (intercalate)
 import Data.Vector.Unboxed (Vector)
 import qualified Data.Vector.Unboxed as V
+import qualified Data.Text.Lazy as T
 import Formatting
 import Statistics.Sample
+import Statistics.Sample.Histogram
 
 data Statistics = Statistics {
     minimumRate :: !Double,
     maximumRate :: !Double,
     meanRate    :: !Double,
     stdDevRate  :: !Double
-} deriving (Eq)
+} deriving Eq
 
 instance Show Statistics where
     show = reportStatistics
@@ -37,3 +39,17 @@ reportStatistics s = intercalate "\n" [
   where
     f = (right 10 ' ' %. string) % (left 10 ' ' %. fixed 1) % " kB/s"
     
+
+data Histogram = Histogram {
+    lowerBoundBucket :: Vector Double,
+    countInBucket :: Vector Int
+} deriving (Eq, Show)
+
+
+analyzeToBuckets :: Vector Double -> Histogram
+analyzeToBuckets observations =
+  let
+    (l,c) = histogram 10 observations
+  in
+    Histogram l c
+

@@ -4,22 +4,21 @@ import qualified Data.ByteString.Lazy.Char8 as L
 
 import Disk.Input
 import Disk.Analyze
+import System.Environment
 
 main :: IO ()
 main = do
     -- Read stdin, lazily
-    input <- L.getContents
+    args <- getArgs
+    input <- if length args > 0
+        then L.readFile (args !! 0)
+        else L.getContents
 
-    -- Grind this down to individual lines. We could have done this in the
-    -- parser but this is cleaner, as it means we have a clean slate when a
-    -- parse fails.
-    let inputs = L.lines input
-
-    -- turn raw lines into Observation objects
-    let observations = processIntoVector inputs
+    let observations = processIntoVector input
 
     let result = analyzeMeasurements observations
-
     print result
         
+    let histogram = analyzeToBuckets observations
+    print histogram
 
