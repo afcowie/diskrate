@@ -1,6 +1,7 @@
 module Main where
 
 import qualified Data.ByteString.Lazy.Char8 as L
+import qualified Data.Text.Lazy.IO as T
 
 import Disk.Input
 import Disk.Analyze
@@ -19,6 +20,9 @@ main = do
     let result = analyzeMeasurements observations
     print result
         
-    let histogram = analyzeToBuckets observations
-    print histogram
+    let histogram = reportHistogram observations
+    T.putStrLn histogram
+
+    let quantile = reportPercentile 99 observations
+    T.putStrLn quantile
 

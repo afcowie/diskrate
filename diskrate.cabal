@@ -20,6 +20,7 @@ executable           rates
                      bytestring,
                      attoparsec,
                      vector,
+                     text,
                      formatting,
                      statistics
 
