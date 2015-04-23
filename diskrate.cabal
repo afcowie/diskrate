@@ -20,6 +20,7 @@ executable           rates
                      bytestring,
                      attoparsec,
                      vector,
+                     formatting,
                      statistics
 
   hs-source-dirs:    src
