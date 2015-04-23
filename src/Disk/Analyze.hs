@@ -74,7 +74,7 @@ reportHistogram observations =
     f :: Builder -> (Double, Int) -> Builder
     f accumulator (l,c) = mappend accumulator (make l c)
 
-    make l c = bprint ((left 10 ' ' %. fixed 2) % (left 7 ' ' %. int) % "\n") l' c
+    make l c = bprint ((left 10 ' ' %. fixed 1) % (left 7 ' ' %. int) % "\n") l' c
       where
         l' = if l < 0 then 0 else l
 
@@ -84,5 +84,5 @@ reportPercentile :: Int -> Vector Double -> Text
 reportPercentile which observations = 
     format f which value
   where
-    f = (left 3 ' ' %. int) % (left 10 ' ' %. fixed 1) % " kB/s"
+    f = (left 5 ' ' %. ords) % (left 15 ' ' %. fixed 1) % " kB/s"
     value = continuousBy spss which 100 observations 
